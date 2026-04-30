@@ -2010,6 +2010,19 @@ let TargetPrefix = "riscv" in {
   defm vfncvt_sat_f_f_q_alt : RISCVConversionRoundingMode;
 } // TargetPrefix = "riscv"
 
+//===----------------------------------------------------------------------===//
+// Crossbar In-Memory Compute Extensions (IISc CIM Research)
+//===----------------------------------------------------------------------===//
+
+let TargetPrefix = "riscv" in {
+
+    def int_riscv_cbmvm : DefaultAttrsIntrinsic<[llvm_i64_ty], // return: result in rd
+    [llvm_i64_ty, llvm_i64_ty], // args: rs1 (vector base), rs2 (matrix base)
+    [IntrNoMem, IntrSpeculatable]
+    >;
+
+    } //TargetPrefix = "riscv"
+
 // Vendor extensions
 //===----------------------------------------------------------------------===//
 include "llvm/IR/IntrinsicsRISCVXTHead.td"

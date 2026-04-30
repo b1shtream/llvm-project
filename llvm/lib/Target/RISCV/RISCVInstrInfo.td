@@ -923,6 +923,26 @@ def SRAW  : ALUW_rr<0b0100000, 0b101, "sraw">,
 } // IsSignExtendingOpW = 1
 } // Predicates = [IsRV64]
 
+//==--------------------------------------==//
+// Custom Crossbar Instructions
+//===-------------------------------------==//
+
+// Crossbar Matrix-Vector Multiply
+// Custom opcode using CUSTOM-0 space (opcode 0b0001011)
+def CBMVM : RVInstR<0b0000001, 0b000, OPC_CUSTOM_0,
+                    (outs GPR:$rd), 
+                    (ins GPR:$rs1, GPR:$rs2),
+                    "cbmvm", "$rd, $rs1, $rs2"> {
+ let hasSideEffects = 1;
+ let mayLoad = 0;
+ let mayStore = 0;
+ let Pattern = [(set GPR:$rd, (int_riscv_cbmvm GPR:$rs1, GPR:$rs2))];
+                    
+
+}
+
+
+
 //===----------------------------------------------------------------------===//
 // Privileged instructions
 //===----------------------------------------------------------------------===//
